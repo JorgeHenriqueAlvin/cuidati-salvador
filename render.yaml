@@ -1,0 +1,26 @@
+# Requer plano pago e disco persistente. Criar este arquivo não provisiona recursos.
+services:
+  - type: web
+    name: cuidati-salvador
+    runtime: node
+    repo: https://github.com/JorgeHenriqueAlvin/cuidati-salvador
+    branch: main
+    plan: starter
+    buildCommand: npm run check && npm test
+    startCommand: sh scripts/start-render.sh
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /var/data/cuidati
+      - key: TRUST_PROXY
+        value: "0"
+    disk:
+      name: cuidati-data
+      mountPath: /var/data
+      sizeGB: 1
