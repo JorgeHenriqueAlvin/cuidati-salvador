@@ -28,7 +28,9 @@ export function createNetlifyHandler({pool,env=process.env}) {
       const url=new URL(request.url),path=url.pathname,method=request.method;
       if(!path.startsWith('/api/'))throw new AppError('Recurso não encontrado.',404);
       if(!['GET','POST','PATCH','DELETE'].includes(method))throw new AppError('Método não permitido.',405);
-      const origin=new URL(env.APP_ORIGIN || env.DEPLOY_PRIME_URL || env.URL || url.origin).origin;
+      // A URL da requisição é validada pelo roteamento da Netlify. Usar variáveis
+      // gravadas no build quebra o formulário após renomear o domínio do site.
+      const origin=new URL(env.APP_ORIGIN || url.origin).origin;
       if(method!=='GET'&&request.headers.get('origin')!==origin)throw new AppError('Origem não permitida.',403);
       const production=url.protocol==='https:';
       const admin=administrator(env);

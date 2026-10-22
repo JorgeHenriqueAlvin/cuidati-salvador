@@ -30,6 +30,13 @@ test('Netlify: migração Postgres e fluxo completo da função',async t=>{
     assert.deepEqual((await call('/settings')).body,{phone:'',email:'',hours:''});
     for(const [path,method]of[['/admin/data','GET'],['/settings','PATCH'],['/visits','POST'],['/leads/'+randomUUID(),'DELETE']])assert.equal((await call(path,method,method==='GET'?undefined:{})).status,401);
   });
+  await t.test('renomear domínio não invalida a origem; fixação explícita é respeitada',async()=>{
+    const renamed='https://cuidati-renamed.netlify.app';
+    const request=()=>new Request(renamed+'/api/leads',{method:'POST',headers:{Origin:renamed,'Content-Type':'application/json'},body:'{}'});
+    assert.equal((await handle(request(),{ip:'198.51.100.12'})).status,400);
+    const pinned=createNetlifyHandler({pool,env:{...env,APP_ORIGIN:env.URL}});
+    assert.equal((await pinned(request(),{ip:'198.51.100.12'})).status,403);
+  });
   await t.test('origem, autenticação e cookie seguro',async()=>{
     assert.equal((await call('/login','POST',{},false,{Origin:'https://attacker.invalid'})).status,403);
     assert.equal((await call('/login','POST',{email:env.ADMIN_EMAIL,password:'wrong'})).status,401);

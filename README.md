@@ -2,7 +2,7 @@
 
 MVP de manutenção preventiva de computadores para pequenos negócios de Salvador/BA. A página pública recebe pedidos de proposta; o painel acompanha interessados, clientes e visitas. Negociação, pagamento e confirmação da agenda continuam manuais pelo WhatsApp.
 
-**Estado real da entrega:** código implementado com testes automatizados. Código disponível no repositório público [JorgeHenriqueAlvin/cuidati-salvador](https://github.com/JorgeHenriqueAlvin/cuidati-salvador). Não há aplicação publicada nem backend de produção provisionado. Nenhuma contratação ou pesquisa com clientes foi realizada. Este projeto foi construído aqui, com backend próprio, após a escolha de não usar Lovable. Não depende de Lovable Cloud ou Supabase.
+**Estado real da entrega:** aplicação publicada em [https://cuidati-salvador.netlify.app/](https://cuidati-salvador.netlify.app/), com função Netlify e migração PostgreSQL aplicada. O administrador e o WhatsApp comercial ainda precisam ser configurados pelo responsável. Nenhuma contratação ou pesquisa com clientes foi realizada. O projeto foi construído diretamente aqui, sem Lovable.
 
 ## Dor e proposta
 
@@ -69,11 +69,11 @@ npm run check
 npm test
 ```
 
-Testes cobrem validação, páginas, restrição das APIs, CSRF, login, desafio de envio, idempotência, persistência, conversão, edição de clientes, visitas, configurações, exclusão, logout e bloqueio de tentativas. Há 13 testes para a versão SQLite e 9 para a versão Netlify/PostgreSQL. Testes locais não comprovam publicação ou homologação no navegador. A automação de CI está em [.github/workflows/ci.yml](.github/workflows/ci.yml). O roteiro de validação manual está em [docs/testes.md](docs/testes.md).
+Testes cobrem validação, páginas, restrição das APIs, CSRF, login, desafio de envio, idempotência, persistência, conversão, edição de clientes, visitas, configurações, exclusão, logout e bloqueio de tentativas. Há 13 testes para a versão SQLite e 10 para a versão Netlify/PostgreSQL. Testes locais não comprovam publicação ou homologação no navegador. A automação de CI está em [.github/workflows/ci.yml](.github/workflows/ci.yml). O roteiro de validação manual está em [docs/testes.md](docs/testes.md).
 
 ## Publicar
 
-**Opção atual: Netlify.** A adaptação está em [netlify.toml](netlify.toml), [netlify/functions/api.mjs](netlify/functions/api.mjs) e [docs/netlify.md](docs/netlify.md), com PostgreSQL persistente e migrações versionadas. A publicação real ainda depende do acesso à conta e de confirmar o deploy; nenhum endereço público é apresentado como verificado.
+**Opção atual: Netlify.** A adaptação está em [netlify.toml](netlify.toml), [netlify/functions/api.mjs](netlify/functions/api.mjs) e [docs/netlify.md](docs/netlify.md), com PostgreSQL persistente e migrações versionadas. A versão está publicada em https://cuidati-salvador.netlify.app/. A configuração do administrador e dos contatos comerciais continua pendente; veja [docs/publicacao.md](docs/publicacao.md).
 
 A configuração Render abaixo fica como alternativa; não é necessária para Netlify.
 
@@ -123,11 +123,18 @@ O briefing e as decisões de implementação estão em [docs/mega-prompt.md](doc
 ## Pendências da entrega DIO
 
 - [x] Repositório público na conta do autor: https://github.com/JorgeHenriqueAlvin/cuidati-salvador
-- [ ] Aplicação publicada com HTTPS e armazenamento persistente.
+- [x] Aplicação publicada com HTTPS, Netlify Functions e PostgreSQL persistente.
 - [ ] Administrador configurado e contatos comerciais reais.
 - [ ] Teste no celular e revisão completa do roteiro manual.
-- [ ] Prints reais da landing page, formulário e painel adicionados ao repositório.
+- [x] Print real da landing page em [docs/screenshots/landing-publicada.jpg](docs/screenshots/landing-publicada.jpg).
+- [ ] Prints do formulário em uso e do painel autenticado.
 - [ ] Validação com pelo menos uma pessoa real documentada com autorização e sem expor seus dados.
-- [ ] URL publicada inserida neste README.
+- [x] URL publicada inserida neste README: https://cuidati-salvador.netlify.app/
 
 Não apresentar esta lista pendente como concluída antes da execução.
+
+## Aplicação publicada
+
+[Abrir CuidaTI Salvador](https://cuidati-salvador.netlify.app/)
+
+![Página pública CuidaTI Salvador](docs/screenshots/landing-publicada.jpg)

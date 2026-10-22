@@ -41,7 +41,7 @@ O comando `admin:create` configura somente o banco SQLite local; ele NÃO config
 
 ## Origem, domínio e limites
 
-As mutações aceitam somente a origem configurada. A função usa `APP_ORIGIN`, depois `DEPLOY_PRIME_URL` e `URL` fornecidas pelo Netlify. Ao usar domínio próprio, definir `APP_ORIGIN=https://seu-dominio`, sem barra final, e republicar. Não usar o mesmo APP_ORIGIN de produção em previews com outro endereço.
+As mutações aceitam somente a origem da própria requisição, cujo domínio é validado pelo roteamento da Netlify. Assim, renomear o endereço do site não deixa o formulário preso a uma variável antiga do build. Para fixar um único domínio, definir `APP_ORIGIN=https://seu-dominio`, sem barra final, e republicar. Não usar o mesmo APP_ORIGIN de produção em previews com outro endereço.
 
 Limites de login e envio ficam no Postgres; não são contadores em memória. O IP vem do `context.ip` da plataforma, sem confiar em cabeçalhos enviados pelo visitante. O desafio de soma é uma proteção básica, sem garantir bloqueio de todo spam.
 

@@ -25,3 +25,7 @@ A prévia local iniciou, mas a observação pelo navegador foi bloqueada pela po
 Após o pedido de usar Netlify, foram adicionados Netlify Functions, PostgreSQL via Netlify Database, migração SQL, configuração de deploy e geração local das credenciais administrativas como hash scrypt. O SQLite continua disponível para execução tradicional; na Netlify não há banco em arquivo local.
 
 A suíte completa passou com 22 testes: 13 da versão SQLite e 9 da versão Netlify/PostgreSQL usando PGlite. Ela verifica a mesma migração e handler de produção, mas não a infraestrutura hospedada ou concorrência entre múltiplas conexões. A homologação do deploy real ainda precisa ser executada.
+
+## Publicação e domínio definitivo
+
+Publicado em https://cuidati-salvador.netlify.app/. Foi corrigida a validação de origem após a renomeação do site, com teste de regressão. A suíte Netlify passou a ter 10 testes; junto com os 13 da versão SQLite são 23 testes. O relatório de publicação e suas pendências estão em docs/publicacao.md.
