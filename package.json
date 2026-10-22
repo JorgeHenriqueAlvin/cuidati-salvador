@@ -1,0 +1,15 @@
+{
+  "name": "cuidati-salvador",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Manutenção preventiva de TI para pequenos negócios de Salvador",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch scripts/dev.js",
+    "admin:create": "node scripts/create-admin.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check server/index.js && node --check public/app.js"
+  }
+}
