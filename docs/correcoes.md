@@ -19,3 +19,9 @@ Não houve uma rodada de correções em Lovable. Os registros abaixo descrevem a
 Publicação, contratação piloto, dados reais de mercado e homologação em celular permanecem pendentes. Não há URL pública a apresentar como resultado.
 
 A prévia local iniciou, mas a observação pelo navegador foi bloqueada pela política do navegador da sessão. Por isso, a revisão visual e a homologação do frontend em navegador não foram concluídas. Os testes de API e de sintaxe não substituem essa etapa.
+
+## Adaptação para Netlify
+
+Após o pedido de usar Netlify, foram adicionados Netlify Functions, PostgreSQL via Netlify Database, migração SQL, configuração de deploy e geração local das credenciais administrativas como hash scrypt. O SQLite continua disponível para execução tradicional; na Netlify não há banco em arquivo local.
+
+A suíte completa passou com 22 testes: 13 da versão SQLite e 9 da versão Netlify/PostgreSQL usando PGlite. Ela verifica a mesma migração e handler de produção, mas não a infraestrutura hospedada ou concorrência entre múltiplas conexões. A homologação do deploy real ainda precisa ser executada.

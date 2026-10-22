@@ -4,12 +4,21 @@
   "private": true,
   "type": "module",
   "description": "Manutenção preventiva de TI para pequenos negócios de Salvador",
-  "engines": { "node": ">=24.0.0" },
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node --watch scripts/dev.js",
     "admin:create": "node scripts/create-admin.js",
+    "admin:netlify": "node scripts/create-netlify-admin.js",
     "test": "node --test tests/*.test.js",
-    "check": "node --check server/index.js && node --check public/app.js"
+    "check": "node --check server/index.js && node --check public/app.js && node --check server/netlify-api.js && node --check netlify/functions/api.mjs && node --check scripts/create-netlify-admin.js"
+  },
+  "dependencies": {
+    "@netlify/database": "^2.0.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.2.17"
   }
 }

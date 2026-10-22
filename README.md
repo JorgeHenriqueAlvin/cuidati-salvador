@@ -31,11 +31,13 @@ O modelo de dimensionamento e o Canvas estão em [docs/negocio.md](docs/negocio.
 
 ## Tecnologia
 
-Node.js 24, servidor HTTP nativo, SQLite persistente pelo módulo `node:sqlite`, HTML, CSS e JavaScript em módulos. Sem dependências npm externas, processo de compilação ou CDN. O banco fica no servidor; o navegador não usa localStorage como banco e não recebe tokens por JavaScript.
+A versão Netlify usa página estática, Netlify Functions e PostgreSQL persistente via `@netlify/database`. A versão local/tradicional preserva Node.js 24, servidor HTTP nativo e SQLite pelo módulo `node:sqlite`. HTML, CSS e JavaScript em módulos, sem CDN. O navegador não usa localStorage como banco e não recebe tokens por JavaScript. Os testes PostgreSQL usam PGlite como dependência de desenvolvimento.
 
 O módulo `node:sqlite` pode emitir aviso de API experimental conforme a versão do Node. Use Node 24 atualizado. Uma instância da aplicação é a configuração suportada neste MVP.
 
 ## Executar localmente
+
+Para executar todas as suítes de teste, instalar primeiro as dependências com `npm ci`. A instalação local abaixo usa SQLite. A configuração do administrador Netlify é separada e está em [docs/netlify.md](docs/netlify.md).
 
 Instale Node.js 24. Na pasta do projeto:
 
@@ -67,13 +69,17 @@ npm run check
 npm test
 ```
 
-Testes cobrem validação, páginas, restrição das APIs, CSRF, login, desafio de envio, idempotência, persistência, conversão, edição de clientes, visitas, configurações, exclusão, logout e bloqueio de tentativas. A automação de CI está em [.github/workflows/ci.yml](.github/workflows/ci.yml). O roteiro de validação manual está em [docs/testes.md](docs/testes.md).
+Testes cobrem validação, páginas, restrição das APIs, CSRF, login, desafio de envio, idempotência, persistência, conversão, edição de clientes, visitas, configurações, exclusão, logout e bloqueio de tentativas. Há 13 testes para a versão SQLite e 9 para a versão Netlify/PostgreSQL. Testes locais não comprovam publicação ou homologação no navegador. A automação de CI está em [.github/workflows/ci.yml](.github/workflows/ci.yml). O roteiro de validação manual está em [docs/testes.md](docs/testes.md).
 
 ## Publicar
 
+**Opção atual: Netlify.** A adaptação está em [netlify.toml](netlify.toml), [netlify/functions/api.mjs](netlify/functions/api.mjs) e [docs/netlify.md](docs/netlify.md), com PostgreSQL persistente e migrações versionadas. A publicação real ainda depende do acesso à conta e de confirmar o deploy; nenhum endereço público é apresentado como verificado.
+
+A configuração Render abaixo fica como alternativa; não é necessária para Netlify.
+
 A configuração para hospedagem no Render está em [render.yaml](render.yaml), com instruções em [docs/render.md](docs/render.md). Ela requer serviço pago e disco persistente. A publicação ainda depende de conectar a conta, revisar o custo e criar o serviço; nenhum recurso foi contratado.
 
-O servidor precisa de **Node 24 e disco persistente**, além de HTTPS no proxy reverso. GitHub guarda o código; GitHub Pages não executa este backend.
+Na alternativa de servidor tradicional, o backend SQLite precisa de **Node 24 e disco persistente**, além de HTTPS no proxy reverso. Na Netlify, Functions e PostgreSQL substituem esse servidor. GitHub guarda o código; GitHub Pages sozinho não executa o backend.
 
 1. Envie este projeto para um repositório público chamado `cuidati-salvador`.
 2. Em um servidor ou provedor compatível, execute o [Dockerfile](Dockerfile) ou `npm start`.
