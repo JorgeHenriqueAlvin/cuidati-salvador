@@ -71,6 +71,8 @@ Testes cobrem validação, páginas, restrição das APIs, CSRF, login, desafio 
 
 ## Publicar
 
+A configuração para hospedagem no Render está em [render.yaml](render.yaml), com instruções em [docs/render.md](docs/render.md). Ela requer serviço pago e disco persistente. A publicação ainda depende de conectar a conta, revisar o custo e criar o serviço; nenhum recurso foi contratado.
+
 O servidor precisa de **Node 24 e disco persistente**, além de HTTPS no proxy reverso. GitHub guarda o código; GitHub Pages não executa este backend.
 
 1. Envie este projeto para um repositório público chamado `cuidati-salvador`.
